@@ -280,6 +280,20 @@ Select user → Fill role-specific details → Save
      ▼
 Role-specific table row created (FK→users.user_id)
 ```
+--- 
+Please note that User Roles specific to the project may be defined in "app/core/config.php" by adding to the existing roles:
+
+```php
+define('USER_ROLES', array_map('ucwords', array_map('strtolower', [
+    'Sys Admin',
+    'Admin', 
+    'Editor',
+    'Subscriber',
+    'Client',
+    'User',
+    'Employee',
+])));
+```
 
 ### 4.3 Key Rule: Separate Login from Role Assignment
 
