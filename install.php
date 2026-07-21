@@ -784,5 +784,55 @@ $currentStep = (int)$step;
 <?php
 // Clean sensitive data if done
 if ($step === 'done') {
+    $config = getDbConfig();
+    if ($config && (!file_exists($envFile) || !preg_match('/^DB_NAME=.+/m', file_get_contents($envFile)))) {
+        $rootUrl = $_SESSION['install_root_url'] ?? detectRootUrl();
+        $siteName = $_SESSION['install_site_name'] ?? 'NtoshiSoft  Form';
+        $host = parse_url($rootUrl, PHP_URL_HOST) ?: 'localhost';
+
+        $envLines = [];
+        $envLines[] = '# Database Configuration';
+        $envLines[] = "DB_HOST={$config['host']}";
+        $envLines[] = "DB_NAME={$config['name']}";
+        $envLines[] = "DB_USER={$config['user']}";
+        $envLines[] = "DB_PASS={$config['pass']}";
+        $envLines[] = 'DB_DRIVER=mysql';
+        $envLines[] = '';
+        $envLines[] = '# Application Configuration';
+        $envLines[] = "APP_NAME=\"{$siteName}\"";
+        $envLines[] = 'APP_NAME_SHORT="NtoshiSoft "';
+        $envLines[] = "APP_DOMAIN={$host}";
+        $envLines[] = 'APP_TAG_LINE="Business management platform"';
+        $envLines[] = 'DEFAULT_TIMEZONE="Africa/Johannesburg"';
+        $envLines[] = "ROOT=\"{$rootUrl}\"";
+        $envLines[] = '';
+        $envLines[] = '# Mail Configuration (Password Reset & Notifications)';
+        $envLines[] = 'MAIL_HOST=smtp.gmail.com';
+        $envLines[] = 'MAIL_USERNAME=';
+        $envLines[] = 'MAIL_PASSWORD=';
+        $envLines[] = 'MAIL_PORT=465';
+        $envLines[] = 'MAIL_ENCRYPTION=ssl';
+        $envLines[] = '';
+        $envLines[] = '# Security Settings';
+        $envLines[] = 'DEBUG=false';
+        $envLines[] = 'APP_ENV=production';
+        $envLines[] = 'SESSION_LIFETIME=120';
+        $envLines[] = 'CSRF_TOKEN_LENGTH=32';
+        $envLines[] = '';
+        $envLines[] = '# Application Constants';
+        $envLines[] = 'EST_YEAR=' . date('Y');
+        $envLines[] = 'POLICY_ADOPT_DATE=' . date('Y-m-d');
+        $envLines[] = 'DEF_CURR=R';
+        $envLines[] = 'JONGI_CLI_VERS=1.0.0';
+        $envLines[] = 'THEME_COLOR=primary';
+        $envLines[] = 'VARIANT_COLOR=#d5ba0b';
+        $envLines[] = '';
+        $envLines[] = '# File Upload Settings';
+        $envLines[] = 'MAX_FILE_SIZE=5242880';
+        $envLines[] = 'ALLOWED_FILE_TYPES=jpg,jpeg,png,gif,pdf,webp,webm,mp3,wav,ogg';
+
+        file_put_contents($envFile, implode("\n", $envLines), LOCK_EX);
+    }
+
     $_SESSION['install_complete'] = true;
 }

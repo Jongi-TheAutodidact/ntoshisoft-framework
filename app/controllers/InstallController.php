@@ -313,8 +313,16 @@ class InstallController
             return;
         }
 
-        if ($_SERVER['REQUEST_METHOD'] === 'POST' || !isset($data['written'])) {
-            $dbConfig = $_SESSION['install_db'];
+        $envPath = ROOTPATH . '../.env';
+        $envAlreadyWritten = file_exists($envPath) && preg_match('/^DB_NAME=.+/m', @file_get_contents($envPath) ?: '');
+
+        if (!$envAlreadyWritten) {
+            $dbConfig = $_SESSION['install_db'] ?? null;
+            if (!$dbConfig) {
+                redirect('install/database');
+                return;
+            }
+
             $rootUrl = $_SESSION['install_root_url'] ?? "http://{$_SERVER['HTTP_HOST']}";
             $siteName = $_SESSION['install_site_name'] ?? 'NtoshiSoft  Form';
 
@@ -349,7 +357,6 @@ class InstallController
                 'ALLOWED_FILE_TYPES' => 'jpg,jpeg,png,gif,pdf,webp,webm,mp3,wav,ogg',
             ];
 
-            $envPath = ROOTPATH . '../.env';
             $written = EnvWriter::write($envData, $envPath);
 
             if ($written) {
@@ -360,6 +367,11 @@ class InstallController
                 $data['error'] = 'Failed to write .env file. Please check file permissions.';
                 $data['env_content'] = $envData;
             }
+        } else {
+            $rootUrl = $_SESSION['install_root_url'] ?? "http://{$_SERVER['HTTP_HOST']}";
+            $_SESSION['install_complete'] = true;
+            $data['success'] = true;
+            $data['login_url'] = $rootUrl . '/auth/login';
         }
 
         $this->view('install/finish', $data);
