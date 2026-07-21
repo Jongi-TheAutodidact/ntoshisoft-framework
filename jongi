@@ -1,0 +1,36 @@
+<?php 
+
+if(php_sapi_name() !== 'cli')
+{
+    die('<span style="color:red;font-weight:bold">Oops. This tool can only be used in the command line environment!!</span>');
+}
+// Define DIRECTORY_SEPARATOR & CPATH Constant and eventually change directory to that path
+
+define('CPATH',__DIR__ . DIRECTORY_SEPARATOR);
+
+define('ROOTPATH',__DIR__ . DIRECTORY_SEPARATOR);
+
+chdir(CPATH);
+
+$action = $argv[1] ?? 'help';
+
+require 'app' . DIRECTORY_SEPARATOR .'jongi' . DIRECTORY_SEPARATOR . 'init.php'; 
+
+$jongi = new Jongi;
+
+if(empty($action))
+{
+    call_user_func_array([$jongi,'help'],[]);
+} else
+{
+    $parts = explode(':',$action);
+    if(is_callable([$jongi,$parts[0]]))
+    {
+        call_user_func_array([$jongi,$parts[0]],[$argv]);
+    } else 
+    {
+        echo "\n\r Oops, Invalid Command!! The \"$argv[1]\" action was not recognised. Make sure to provide relevant action/function after \"php jongi (...).\" \n\r Kindly have a look below, for allowed commands!\n\r";
+        call_user_func_array([$jongi,'help'],[]);
+    }
+}
+

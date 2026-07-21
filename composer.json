@@ -1,0 +1,48 @@
+{
+    "name": "jongi-theautodidact/ntoshisoft-framework",
+    "description": "NtoshiSoft Framework - Lightweight PHP MVC framework for rapid business application development. Built for small to medium-sized business applications, featuring a CLI tool, modular architecture, and user-centric identity model.",
+    "keywords": [
+        "PHP", "MVC", "Framework", "NtoshiSoft", "lightweight PHP framework",
+        "rapid development", "PHP CLI", "business applications", "PHP CRM"
+    ],
+    "type": "project",
+    "version": "1.1.0",
+    "license": "GPL-3.0-or-later",
+    "homepage": "https://github.com/Jongi-TheAutodidact/ntoshisoft-framework",
+    "support": {
+        "issues": "https://github.com/Jongi-TheAutodidact/ntoshisoft-framework/issues",
+        "source": "https://github.com/Jongi-TheAutodidact/ntoshisoft-framework"
+    },
+    "authors": [
+        {
+            "name": "Jongi Mbodla",
+            "email": "jongim@jongimbodla.africa",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": ">=8.0",
+        "phpmailer/phpmailer": "^6.9",
+        "dompdf/dompdf": "^2.0"
+    },
+    "autoload": {
+        "classmap": [
+            "app/core/",
+            "app/models/",
+            "app/controllers/",
+            "app/middleware/",
+            "app/jongi/Jongi.php",
+            "app/jongi/CLIDB.php",
+            "app/jongi/Migration.php"
+        ],
+        "files": [
+            "app/core/config.php",
+            "app/core/functions.php"
+        ]
+    },
+    "bin": [
+        "jongi"
+    ],
+    "minimum-stability": "beta",
+    "prefer-stable": true
+}

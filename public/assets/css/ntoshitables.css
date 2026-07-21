@@ -1,0 +1,124 @@
+/*!
+ * NtoshiSoft - NtoshiTable Stylesheet
+ * (c) Jongi Mbodla | Jongi Brands Tech Solutions
+ * Website: https://jongibrandz.co.za
+ *
+ * This file is part of the Ntoshi Framework.
+ * All rights reserved. Unauthorized use, reproduction, or distribution is strictly prohibited.
+ *
+ */
+
+/* Container & Layout */
+.datatable-wrapper {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 1rem 0;
+}
+
+/* Top Controls (Search + Per Page) */
+.datatable-top {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  align-items: center;
+  margin-bottom: 0.75rem;
+  padding: 0.5rem;
+  background: #f9f9f9;
+  border-radius: 12px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  transition: background 0.3s ease;
+}
+
+/* Search Input & Per-Page Dropdown */
+.datatable-top input[type="text"],
+.datatable-top select {
+  padding: 0.4rem 0.8rem;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  outline: none;
+  transition: all 0.2s ease;
+}
+
+.datatable-top input[type="text"]:focus,
+.datatable-top select:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.2);
+}
+
+/* Pagination Buttons */
+.datatable-pagination {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: center;
+  margin-top: 0.75rem;
+  justify-content: center;
+}
+
+.datatable-pagination button {
+  padding: 0.4rem 0.8rem;
+  border: none;
+  border-radius: 50px;
+  background: linear-gradient(135deg, #007bff, #0056b3);
+  color: white;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 5px rgba(0, 123, 255, 0.2);
+}
+
+.datatable-pagination button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 123, 255, 0.3);
+}
+
+.datatable-pagination button:active {
+  transform: translateY(0);
+}
+
+/* Active Page Button */
+.datatable-pagination .active {
+  background: linear-gradient(135deg, #0056b3, #003f7f);
+  font-weight: bold;
+}
+
+/* Disabled Buttons */
+.datatable-pagination button:disabled {
+  background: #e0e0e0;
+  color: #888;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+/* Sort Indicators */
+.sort-asc::after {
+  content: ' 🔼';
+  font-size: 0.8rem;
+  transition: color 0.2s ease;
+}
+
+.sort-desc::after {
+  content: ' 🔽';
+  font-size: 0.8rem;
+  transition: color 0.2s ease;
+}
+
+/* Optional: Add subtle animation to sort arrows */
+.sort-asc:hover::after,
+.sort-desc:hover::after {
+  color: #007bff;
+}
+
+#export-btn {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: background-color 0.3s ease;
+}
+
+#export-btn:hover {
+  background-color: #0056b3;
+}
+

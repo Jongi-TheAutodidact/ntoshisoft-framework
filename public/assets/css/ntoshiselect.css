@@ -1,0 +1,62 @@
+/*!
+ * NtoshiSoft - Ntoshi Select Stylesheet
+ * (c) Jongi Mbodla | Jongi Brands Tech Solutions
+ * Website: https://jongibrandz.co.za
+ *
+ * This file is part of the Ntoshi Framework.
+ * All rights reserved. Unauthorized use, reproduction, or distribution is strictly prohibited.
+ *
+ */
+
+.ntoshi-select {
+  position: relative;
+  font-family: sans-serif;
+  margin-bottom: 1rem;
+}
+
+.ntoshi-select input[type="text"] {
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 1rem;
+  outline: none;
+  cursor: pointer;
+  margin-left: 0;
+  transition: border-color 0.3s ease;
+}
+
+.ntoshi-select input[type="text"]:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.2);
+}
+
+.ntoshi-select-dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: white;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  max-height: 200px;
+  overflow-y: auto;
+  z-index: 999;
+  display: none;
+}
+
+.ntoshi-select-options .ntoshi-select-option {
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.ntoshi-select-options .ntoshi-select-option:hover,
+.ntoshi-select-options .ntoshi-select-option.highlight {
+  background-color: #080741;
+}
+
+.ntoshi-select-options .ntoshi-select-option.selected {
+  background-color: #e3f2fd;
+  font-weight: bold;
+}
