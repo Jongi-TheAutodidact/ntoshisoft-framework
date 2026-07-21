@@ -6,10 +6,6 @@
  */
 $this->view('inc/header', $data);
 ?>
-<div class="p-3 mt-2 mx-4 bg-body-tertiary shadow-sm rounded animated-card d-flex flex-column align-items-center text-center" style="--animation-order: 1;">
-    <?php $this->view('inc/welcome', $data); ?>
-</div>
-
 <main id="main" class="main">
     <section class="section p-4">
         <div class="row">
@@ -34,7 +30,7 @@ $this->view('inc/header', $data);
                                 <div class="col-lg-12 text-center">
                                     <label>
                                         <h6 class="text-center" style="cursor:pointer">Click to upload/change image</h6>
-                                        <img src="<?= get_image($row->image, 'logo') ?>" style="object-fit:cover;cursor:pointer">
+                                        <img src="<?= $row->image ? get_image($row->image, 'logo') : '' ?>" style="object-fit:cover;cursor:pointer">
                                         <input onchange="display_image(this.files[0], event)" type="file" name="<?= esc('image') ?>" class="d-none">
                                     </label>
                                 </div>

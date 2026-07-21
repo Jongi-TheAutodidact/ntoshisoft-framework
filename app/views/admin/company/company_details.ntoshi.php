@@ -7,9 +7,6 @@
  */
 $this->view('inc/header', $data);
 ?>
-<div class="p-3 mt-2 mx-4 bg-body-tertiary shadow-sm rounded animated-card d-flex flex-column align-items-center text-center" style="--animation-order: 1;">
-    <?php $this->view('inc/welcome', $data); ?>
-</div>
 
 <main id="main" class="main">
     <section class="section p-4">
@@ -24,12 +21,12 @@ $this->view('inc/header', $data);
                                 <tbody>
                                     <?php
                                     $userRows = 1;
-                                    if (!empty($company_details)) :
+                                    if (!empty($company_details)) : show($company_details[0]->about);die;
                                         foreach ($company_details as $row) :
                                     ?>
                                             <tr>
                                                 <th scope="col">Name:</th>
-                                                <td><img src="<?= get_image($row->image, 'logo') ?? ROOT . '/assets/img/ntoshi-logo' ?>" alt="App Logo" width="100" height="90"></td>
+                                                <td><img src="<?= $row->image ? get_image($row->image, 'logo') : ROOT . '/assets/img/logos/logo.png?v=1784597501' ?>" alt="App Logo" width="100" height="90"></td>
                                             </tr>
                                             <tr>
                                                 <th scope="col">Name:</th>
@@ -56,7 +53,7 @@ $this->view('inc/header', $data);
                                             <?php if ($admin_user) : ?>
                                                 <tr>
                                                     <th scope="col">Action:</th>
-                                                    <td><a href="<?= ROOT ?>/admin/company/edit/<?= $row->id ?>"><i class="bi bi-pencil-square m-2 text-primary"></i></a></td>
+                                                    <td><a href="<?= ROOT ?>/admin/company/edit/<?= $row->id ?>"><i class="fa fa-pencil-square m-2 text-primary"></i></a></td>
                                                 </tr>
                                             <?php endif; ?>
 
