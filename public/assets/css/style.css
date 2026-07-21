@@ -56,6 +56,11 @@ body {
     color: var(--text-muted) !important;
 }
 
+/* Make sure text elements use the variables */
+h1, h2, h3, h4, h5, h6, p, span, div, td, th {
+  color: var(--ns-text-primary);
+}
+
 .glass-card, .card {
     background: var(--card-bg);
     border-color: var(--border-color);
@@ -500,8 +505,9 @@ body.light .star {
 
 .theme-toggle {
   position: fixed;
-  bottom: 24px;
-  right: 24px;
+  top: 50%;
+  left: 96%;
+  transform: translate(-50%, -50%);
   z-index: 99;
   background: rgba(0, 0, 0, 0.6);
   backdrop-filter: blur(8px);
