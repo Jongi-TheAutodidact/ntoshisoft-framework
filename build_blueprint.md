@@ -1,5 +1,5 @@
 # NtoshiSoft Framework — Business Application Build Blueprint
-> **Version:** 1.0.0 | **Author:** Jongi Mbodla | **Last updated:** 2026-05-30
+> **Version:** 1.1.0 | **Author:** Jongi Mbodla | **Last updated:** 2026-0721
 > Use this document as the canonical reference when building any production-ready business application on NtoshiSoft.
 
 ---
@@ -367,7 +367,48 @@ Always join using `r.user_id = u.user_id` (not `r.user_id = u.id`).
 
 ## 5. Step-by-Step Build Process
 
-### PHASE 0: Refer to the README.md file herein
+### PHASE 0: Make sure to refer to the README.md file herein, for more step-by-step build process:
+---
+## Getting Started
+
+### Option 1: Install via Composer (Recommended)
+
+```bash
+composer create-project jongi-theautodidact/ntoshisoft-framework my-app
+cd my-app
+```
+
+### Option 2: Clone from GitHub
+
+```bash
+git clone https://github.com/Jongi-TheAutodidact/ntoshisoft-framework.git
+cd ntoshisoft-framework
+composer install
+```
+
+Or [download the ZIP](https://github.com/Jongi-TheAutodidact/ntoshisoft-framework/archive/refs/heads/main.zip), extract, and run `composer install`.
+
+---
+
+## Post-Installation: Running the Setup Wizard
+
+After installation, the framework guides you through a **6-step web-based wizard** to configure your application.
+
+### 1. Live Server Prerequisite
+
+> **Important:** On a live server, before running the install wizard, you **must** rename `.htaccess-bkp` to `.htaccess` in the project root. Without this, the browser will display a blank page because Apache URL rewriting will not be active.
+
+```bash
+mv .htaccess-bkp .htaccess
+```
+
+This step is **not required** on localhost (XAMPP) since the app is accessed directly via the `public/` directory.
+
+### 2. Copy the Environment File
+
+```bash
+cp .env.example .env
+```
 
 ### PHASE 1: Database Design & Migrations (30 minutes)
 
