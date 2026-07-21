@@ -1506,6 +1506,245 @@ $settings->set('key_name', 'value');
 
 ---
 
+## The Front End:
+Drawing inspiration from the html below (ONLY AS A DEMO AND NOT ALIGNED IN ANY WAY WITH THE CURRENT PROJECT), refactor the home.ntoshi.php view file in 'app/views/front' such that it displays the relevant front facing content of the project (ie in the case of CMS that are non-internal management apps like accounting system, business crm, etc...) The front page should include sections that populates data database for modules worthy of displaying in the front end, for example 'Upcoming Events' - dynamically queried, blog posts (where applicable), upcoming funeral (in the case of a funeral home), etc...Other sections are, about, contact, operating times, social links, all of which are drawn from the available module "Company Details", others should be testimonials and the 'OpenMaps' section defaulted to the address of:
+Jongi Brands Tech Solutions
+Office no 19, Second Floor, Harmony Building 
+14 Market Street, North End
+Gqeberha, EC
+South Africa
+6070
+
+This nay be dynamically display using the "$company_details = new CompanyDetail" object, [$company_details[0]->about, $company_details[0]->address, $company_details[0]->name] etc...
+Make sure to migrate the following for this to take effect:
+
+ - php jongi migrate Ntoshi_18th_Feb_2024_01_50_33_CompanyDetails.php
+ - php jongi migrate Ntoshi_19th_Feb_2024_06_16_25_OpHours.php
+ - php jongi migrate Ntoshi_20th_Feb_2024_02_24_21_SocialLinks.php
+
+otherwise you will get an error. Do this for all pages that return "page not found" while you have its controller, accurately set route, and views.
+
+```html
+<?php
+
+/**
+ * @var string $page_title
+ * @var array $data
+ * @var array $partners
+ * @var int $totalPartners
+ */
+?>
+
+<?php $this->view('inc/header', $data); ?>
+<div class="mx-2">
+
+    <!-- Hero Section -->
+    <div class="glass-card text-center mb-5">
+        <i class="fas fa-briefcase" style="font-size: 3.5rem; color: #2dd4bf;"></i>
+        <h1 class="gradient-text mt-3">Join the Digital Sovereignty Movement <br> <small style="font-size: 1.7rem;">As Our Marketing Partner</small> </h1>
+        <p class="lead mt-3"><strong>Partner with us to earn up to 50% upfront commission + 3.8 <i class="fas fa-percent"></i> (6 mnths) Revenue Share.</strong> No costs, no inventory, no limits. Join South Africa's digital sovereignty movement today.</p>
+        <?php if (empty(user())): ?>
+            <div class="mt-4">
+                <a href="<?= ROOT . '/auth/register' ?>" class="btn-primary">Create Account</a>
+                <a href="<?= ROOT . '/auth/login' ?>" class="btn-outline ms-3">Sign In</a>
+            </div>
+        <?php endif; ?>
+    </div>
+
+    <?= Util::displayFlash('application_submitted', 'success') ?>
+    <?= Util::displayFlash('no_access', 'danger') ?>
+    <?= Util::displayFlash('partner_success', 'success') ?>
+    <?= Util::displayFlash('partner_error', 'danger') ?>
+
+    <!-- ============================================ -->
+    <!-- PARTNERSHIP OPPORTUNITIES SECTION            -->
+    <!-- ============================================ -->
+    <section class="mb-5" id="partnerships">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2 class="gradient-text">
+                <i class="fas fa-handshake" style="color: #f59e0b;"></i>
+                Partner With Us
+            </h2>
+            <div>
+                <span class="badge" style="background: rgba(245, 158, 11, 0.2); color: #f59e0b; padding: 8px 16px; margin-right: 10px;">
+                    <i class="fas fa-percent"></i> 50% Commission
+                </span>
+                <?php
+                switch (user('user_role')) {
+                    case 'Marketing Partner': ?>
+                        <a href="<?= ROOT . '/partner/dashboard' ?>" class="jbts-btn-success" style="padding: 8px 20px; font-size: 0.85rem;">
+                            <i class="fas fa-rocket"></i> Partner Portal/Dashboard
+                        </a>
+                    <?php
+                        break;
+
+                    default: ?>
+                        <a href="<?= ROOT . '/marketing-partners' ?>" class="btn-warning" style="padding: 8px 20px; font-size: 0.85rem;">
+                            <i class="fas fa-rocket"></i> Apply as Partner
+                        </a>
+                <?php
+                        break;
+                }
+                ?>
+
+
+            </div>
+        </div>
+
+        <!-- Partner Program Overview Cards -->
+        <div class="row g-4 mb-4">
+            <div class="col-md-3">
+                <div class="glass-card text-center p-3" style="border-left: 3px solid #f59e0b;">
+                    <i class="fas fa-coins" style="font-size: 2rem; color: #f59e0b;"></i>
+                    <h4 class="mt-2" style="color: #f59e0b;">30-50%</h4>
+                    <p class="small text-muted">Upfront Commission per sale</p>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="glass-card text-center p-3" style="border-left: 3px solid #2dd4bf;">
+                    <i class="fas fa-sync-alt" style="font-size: 2rem; color: #2dd4bf;"></i>
+                    <h4 class="mt-2" style="color: #2dd4bf;">3.8 <i class="fas fa-percent"></i></h4>
+                    <p class="small text-muted">Recurring Revenue Share</p>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="glass-card text-center p-3" style="border-left: 3px solid #a78bfa;">
+                    <i class="fas fa-zero" style="font-size: 2rem; color: #a78bfa;"></i>
+                    <h4 class="mt-2" style="color: #a78bfa;">R0</h4>
+                    <p class="small text-muted">No Upfront Costs</p>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="glass-card text-center p-3" style="border-left: 3px solid #f472b6;">
+                    <i class="fas fa-users" style="font-size: 2rem; color: #f472b6;"></i>
+                    <h4 class="mt-2" style="color: #f472b6;">Unlimited</h4>
+                    <p class="small text-muted">Earning Potential</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Partner Feature Cards -->
+        <div class="row g-4">
+            <!-- Partner Type 1: IT Consultants -->
+            <div class="col-md-4">
+                <div class="glass-card h-100" style="border-top: 3px solid #f59e0b;">
+                    <div class="d-flex justify-content-between align-items-start mb-3">
+                        <span class="badge" style="background: rgba(245, 158, 11, 0.2); color: #f59e0b; font-size: 0.75rem;">
+                            <i class="fas fa-laptop"></i> IT Consultants & MSPs
+                        </span>
+                        <span class="badge" style="background: rgba(45,212,191,0.2); color: #2dd4bf;">
+                            <i class="fas fa-percent"></i> 30-50% Commission
+                        </span>
+                    </div>
+                    <h4 class="fs-5 mb-2">Independent IT Consultants</h4>
+                    <p class="small text-muted" style="opacity: 0.8;">
+                        Sell The Magic USB ecosystem to your existing SMME clients. Earn high-margin commissions on every sale plus recurring revenue.
+                    </p>
+                    <ul class="small" style="list-style: none; padding-left: 0;">
+                        <li><i class="fas fa-check-circle" style="color: #2dd4bf;"></i> No inventory required</li>
+                        <li><i class="fas fa-check-circle" style="color: #2dd4bf;"></i> Zero subscription fees for clients</li>
+                        <li><i class="fas fa-check-circle" style="color: #2dd4bf;"></i> POPIA-compliant solution</li>
+                    </ul>
+                    <a href="<?= ROOT . '/marketing-partners' ?>" class="btn-warning w-100 text-center" style="padding: 8px; font-size: 0.85rem; margin-top: 10px;">
+                        <i class="fas fa-handshake"></i> Partner Now
+                    </a>
+                </div>
+            </div>
+
+            <!-- Partner Type 2: B2B Growth Specialists -->
+            <div class="col-md-4">
+                <div class="glass-card h-100" style="border-top: 3px solid #a78bfa;">
+                    <div class="d-flex justify-content-between align-items-start mb-3">
+                        <span class="badge" style="background: rgba(167, 139, 250, 0.2); color: #a78bfa; font-size: 0.75rem;">
+                            <i class="fas fa-chart-line"></i> B2B Growth Specialists
+                        </span>
+                        <span class="badge" style="background: rgba(45,212,191,0.2); color: #2dd4bf;">3.8 <i class="fas fa-percent"></i> (6 mnths) Revenue Share
+
+                        </span>
+                    </div>
+                    <h4 class="fs-5 mb-2">B2B Sales & Growth Agents</h4>
+                    <p class="small text-muted" style="opacity: 0.8;">
+                        Leverage your network of business owners and decision-makers. Offer a unique offline-first private cloud solution that solves real problems.
+                    </p>
+                    <ul class="small" style="list-style: none; padding-left: 0;">
+                        <li><i class="fas fa-check-circle" style="color: #2dd4bf;"></i> Recurring passive income</li>
+                        <li><i class="fas fa-check-circle" style="color: #2dd4bf;"></i> High-value enterprise clients</li>
+                        <li><i class="fas fa-check-circle" style="color: #2dd4bf;"></i> No technical expertise needed</li>
+                    </ul>
+                    <a href="<?= ROOT . '/marketing-partners' ?>" class="btn-primary w-100 text-center" style="padding: 8px; font-size: 0.85rem; margin-top: 10px;">
+                        <i class="fas fa-handshake"></i> Partner Now
+                    </a>
+                </div>
+            </div>
+
+            <!-- Partner Type 3: Digital Marketers -->
+            <div class="col-md-4">
+                <div class="glass-card h-100" style="border-top: 3px solid #f472b6;">
+                    <div class="d-flex justify-content-between align-items-start mb-3">
+                        <span class="badge" style="background: rgba(244, 114, 182, 0.2); color: #f472b6; font-size: 0.75rem;">
+                            <i class="fas fa-bullhorn"></i> Digital Marketers
+                        </span>
+                        <span class="badge" style="background: rgba(45,212,191,0.2); color: #2dd4bf;">
+                            <i class="fas fa-percent"></i> CPA + Revenue Share
+                        </span>
+                    </div>
+                    <h4 class="fs-5 mb-2">Digital Marketing Partners</h4>
+                    <p class="small text-muted" style="opacity: 0.8;">
+                        Run targeted campaigns to generate qualified leads. Earn CPA payouts plus recurring revenue from converted clients.
+                    </p>
+                    <ul class="small" style="list-style: none; padding-left: 0;">
+                        <li><i class="fas fa-check-circle" style="color: #2dd4bf;"></i> Performance-based payouts</li>
+                        <li><i class="fas fa-check-circle" style="color: #2dd4bf;"></i> Clear attribution tracking</li>
+                        <li><i class="fas fa-check-circle" style="color: #2dd4bf;"></i> Ready-made campaign assets</li>
+                    </ul>
+                    <a href="<?= ROOT . '/marketing-partners' ?>" class="btn-outline w-100 text-center" style="padding: 8px; font-size: 0.85rem; margin-top: 10px;">
+                        <i class="fas fa-handshake"></i> Partner Now
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Active Partners Counter -->
+        <?php if (isset($totalPartners) && $totalPartners > 0): ?>
+            <div class="mt-4 text-center">
+                <span class="badge" style="background: rgba(45,212,191,0.1); color: #2dd4bf; padding: 8px 20px;">
+                    <i class="fas fa-users"></i> <?= $totalPartners ?> Active Partners Already Onboarded
+                </span>
+            </div>
+        <?php endif; ?>
+    </section>
+
+    <!-- Divider Between Partnerships and Jobs -->
+    <hr class="my-5" style="border-color: rgba(0,255,255,0.1);">
+
+
+    <!-- Call to Action: Partner vs Job -->
+    <div class="glass-card text-center mt-5" style="background: linear-gradient(135deg, rgba(245,158,11,0.05), rgba(45,212,191,0.05));">
+        <div class="row g-4 align-items-center">
+            <div class="col-md-6">
+                <i class="fas fa-handshake" style="font-size: 2.5rem; color: #f59e0b;"></i>
+                <h4 class="mt-2">Prefer Partnership?</h4>
+                <p class="small text-muted">Earn high commissions and recurring revenue</p>
+                <a href="<?= ROOT . '/marketing-partners' ?>" class="btn-warning" style="padding: 10px 30px;">
+                    <i class="fas fa-rocket"></i> Become a Partner
+                </a>
+            </div>
+            <div class="col-md-6">
+                <i class="fas fa-briefcase" style="font-size: 2.5rem; color: #2dd4bf;"></i>
+                <h4 class="mt-2">Looking for a Job?</h4>
+                <p class="small text-muted">Join our team and build your career</p>
+                <a href="https://careers.jongibrandz.co.za" target="_blank" class="btn-primary" style="padding: 10px 30px;">
+                    <i class="fas fa-search"></i> Browse Jobs
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<?php $this->view('inc/footer'); ?>
+```
+--- 
+
 > **Final Note:** Every business application ever built can be modeled using this framework's
 > User-Centric Identity Model. Whether you're managing patients, students, tenants,
 > drivers, members, or employees — the pattern is identical: **User first, role second.**
