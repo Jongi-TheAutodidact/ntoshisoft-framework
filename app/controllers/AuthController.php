@@ -56,7 +56,6 @@ class AuthController
 
 	public function register(): void
 	{
-		redirect('auth/login');
 		$user = new User();
 
 		// Create Users' Profile Folder
@@ -87,53 +86,8 @@ class AuthController
 						Util::setFlash('username_exists_error', 'Username already in use by another user!!');
 						redirect('admin/users/new');
 					} else {
-						// Generate the Username
-						$_POST['username'] = trim(ucfirst($_POST['surname'])) . rand(101, 999);
-
-						// Generate the Email
-						$_POST['email'] = 'user' .  $_POST['user_id'] . '@ntoshisoft.africa';
-
-						// Generate Password (raw)
-						$rawPassword = $_POST['password'];
-
-						/** 
-						 * =========================
-						 * LOG USERNAME & PASSWORD
-						 * =========================
-						 */
-						
-						$logDir = __DIR__ . '/../../app/private/';
-						$logFile = $logDir . 'password_log_file.txt';
-
-						if (!file_exists($logDir)) {
-							mkdir($logDir, 0777, true);
-						}
-
-						$logEntry = sprintf(
-							"%-20s | %-20s | %-20s | %-20s\n",
-							date('Y-m-d H:i:s'),
-							$_POST['username'],
-							$rawPassword,
-							$_POST['created_by']
-						);
-
-						// Add table header if file is new/empty
-						if (!file_exists($logFile) || filesize($logFile) === 0) {
-							$header = sprintf(
-								"%-20s | %-20s | %-20s | %-20s\n%s\n",
-								"Date and Time",
-								"Username",
-								"Password",
-								"Created By",
-								str_repeat("-", 92)
-							);
-							file_put_contents($logFile, $header, FILE_APPEND);
-						}
-
-						file_put_contents($logFile, $logEntry, FILE_APPEND);
-
 						// Hash The Submitted Password
-						$_POST['password'] = password_hash($rawPassword, PASSWORD_DEFAULT);
+						$_POST['password'] = password_hash($_POST['password'], PASSWORD_DEFAULT);
 
 						// Default User Role
 						$_POST['user_role'] = 'User';

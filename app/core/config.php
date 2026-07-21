@@ -80,16 +80,10 @@ define('VARIANT_COLOR', EnvLoader::get('VARIANT_COLOR', '#007bff'));
 define('MAX_FILE_SIZE', EnvLoader::int('MAX_FILE_SIZE', 5242880)); // 5MB
 define('ALLOWED_FILE_TYPES', explode(',', EnvLoader::get('ALLOWED_FILE_TYPES', 'jpg,jpeg,png,gif,pdf')));
 
-// Arrays that don't need to be in environment variables
+
 define('USER_ROLES', array_map('ucwords', array_map('strtolower', [
     'Sys Admin',
     'Admin', 
-    'Intelligence Director',
-    'Intelligence Officer',
-    'Intelligence Analyst',
-    'Field Agent',
-    'Community Coordinator',
-    'Community Member',
     'Editor',
     'Subscriber',
     'Client',
@@ -108,26 +102,6 @@ define('PROVINCES', array_map('ucwords', array_map('strtolower', [
     'Limpopo',
     'Gauteng'
 ])));
-
-define('SCHEME_GROUPS', array_map('ucwords', array_map('strtolower', [
-    'Silver',
-    'Gold', 
-    'Platinum',
-])));
-
-define('SOURCE_OF_FUNDS', array_map('ucwords', array_map('strtolower', [
-    'Salary/Wages',
-    'Pension',
-    'Support Grant',
-    'Other',
-])));
-
-// sentinel SA Specific Constants
-define('THREAT_LEVELS', ['LOW', 'MEDIUM', 'HIGH', 'CRITICAL', 'AMBER']);
-define('INTEL_CLASSIFICATIONS', ['UNCLASSIFIED', 'RESTRICTED', 'CONFIDENTIAL', 'SECRET', 'TOP SECRET']);
-define('INTEL_STATUSES', ['DRAFT', 'SUBMITTED', 'VERIFIED', 'CORROBORATED', 'ACTIONED', 'CLOSED']);
-define('INCIDENT_TYPES', ['THEFT', 'BURGLARY', 'VANDALISM', 'SUSPICIOUS', 'VEHICLE', 'PERSON', 'FIRE', 'FLOOD', 'ACCIDENT', 'MISSING_PERSON', 'PUBLIC_NUISANCE', 'TRAFFIC', 'OTHER']);
-define('CCI_THRESHOLDS', ['LOW' => 0, 'MEDIUM' => 35, 'HIGH' => 65, 'VERIFIED' => 85]);
 
 // Set timezone
 date_default_timezone_set(DEFAULT_TIMEZONE);

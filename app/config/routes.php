@@ -22,6 +22,7 @@ return [
 
     /* ADMIN ROUTES */ 
     'admin'                                      => ['AdminController', 'index'],
+    'admin/no-access'                            => ['AdminController', 'no_access'],
 
     // Users 
     'admin/users'                                => ['UserController', 'index', 'middleware' => ['AuthMiddleware']],

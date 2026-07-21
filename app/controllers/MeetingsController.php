@@ -16,7 +16,7 @@ class MeetingsController
 		$user = new User();
 		/*** CHECK IF USER IS LOGGED IN ***/
 		if (!$user->logged_in()) {
-			redirect('login');
+			redirect('auth/login');
 		}
 	}
 

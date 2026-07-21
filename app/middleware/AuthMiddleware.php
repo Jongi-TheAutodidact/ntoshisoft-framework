@@ -35,7 +35,7 @@ class AuthMiddleware extends Middleware
                 ]);
                 exit;
             } else {
-                redirect('login');
+                redirect('auth/login');
             }
         }
         
@@ -78,7 +78,7 @@ class AuthMiddleware extends Middleware
                 ]);
                 exit;
             } else {
-                redirect('login');
+                redirect('auth/login');
             }
         }
         

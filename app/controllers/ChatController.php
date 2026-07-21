@@ -10,7 +10,7 @@ class ChatController
     {
         $user = new User();
         if (!$user->logged_in()) {
-            redirect('login');
+            redirect('auth/login');
         }
     }
 

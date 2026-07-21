@@ -35,7 +35,7 @@ class RoleMiddleware extends Middleware
                 ]);
                 exit;
             } else {
-                redirect('login');
+                redirect('auth/login');
             }
         }
         
@@ -63,7 +63,7 @@ class RoleMiddleware extends Middleware
             
             session_destroy();
             session_start();
-            redirect('login');
+            redirect('auth/login');
         }
         
         $_SESSION['last_activity'] = time();

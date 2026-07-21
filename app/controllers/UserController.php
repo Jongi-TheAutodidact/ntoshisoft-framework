@@ -16,7 +16,7 @@ class UserController
 
 		// Check if current user is logged in 
 		if (!$user->logged_in())
-			redirect('login');
+			redirect('auth/login');
 	}
 
 	public function index(?string $id = null): void
@@ -38,7 +38,7 @@ class UserController
 
 		// Check if current user is looged in 
 		if (!$user->logged_in())
-			redirect('login');
+			redirect('auth/login');
 
 		$data['rows'] = $user->findAll();
 
@@ -61,7 +61,7 @@ class UserController
 
 		// Check if current user is logged in 
 		if (!$user->logged_in())
-			redirect('login');
+			redirect('auth/login');
 
 		if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 			if ($user->validate($_FILES, $_POST)) {
@@ -128,7 +128,7 @@ class UserController
 
 		// Check if current user is looged in 
 		if (!$user->logged_in())
-			redirect('login');
+			redirect('auth/login');
 
 		$data['row'] = $user->first(['id' => $id]);
 
@@ -176,7 +176,7 @@ class UserController
 
 		// Check if current user is looged in 
 		if (!$user->logged_in())
-			redirect('login');
+			redirect('auth/login');
 
 		$data['row'] = $user->first(['id' => $id]);
 

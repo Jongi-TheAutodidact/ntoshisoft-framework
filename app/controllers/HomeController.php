@@ -11,6 +11,8 @@ class HomeController
 		// redirect('admin');
 	}
 
+	
+
 	public function index(?string $id = null): void
 	{
 		$user = new User();

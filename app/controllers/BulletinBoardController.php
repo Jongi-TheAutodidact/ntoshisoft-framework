@@ -14,7 +14,7 @@ class BulletinBoardController
         $user = new User();
 
         if (!$user->logged_in()) {
-            redirect('login');
+            redirect('auth/login');
         }
 
         $data['rows'] = $model->findAll() ?? [];
@@ -30,7 +30,7 @@ class BulletinBoardController
         $user = new User();
 
         if (!$user->logged_in()) {
-            redirect('login');
+            redirect('auth/login');
         }
 
         $folder = 'uploads/bulletin/';
@@ -71,7 +71,7 @@ class BulletinBoardController
         $user = new User();
 
         if (!$user->logged_in()) {
-            redirect('login');
+            redirect('auth/login');
         }
 
         $data['row'] = $model->first(['id' => $id]);
@@ -115,7 +115,7 @@ class BulletinBoardController
         $user = new User();
 
         if (!$user->logged_in()) {
-            redirect('login');
+            redirect('auth/login');
         }
 
         $data['row'] = $model->first(['id' => $id]);
@@ -136,7 +136,7 @@ class BulletinBoardController
         $user = new User();
 
         if (!$user->logged_in()) {
-            redirect('login');
+            redirect('auth/login');
         }
 
         $model->update($id, ['status' => 'archived', 'updated_by' => user('firstname') . ' ' . user('surname')]);

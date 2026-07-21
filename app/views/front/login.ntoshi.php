@@ -11,10 +11,6 @@
 
 <div class="frontend-card auth-card">
     <div class="card-body mx-5">
-        <div class="text-center">
-            <img src="<?= ROOT . '/assets/img/logos/logo.png' ?>" width="60%" alt="<?= get_image('', 'logo') ?>">
-        </div>
-        <hr>
         <?php if (!empty($errors)) : ?>
             <div class="alert alert-danger text-center">
                 <?= implode('<br>', $errors);  ?>

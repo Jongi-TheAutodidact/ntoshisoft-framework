@@ -14,7 +14,7 @@ class NotificationController
         $this->userModel = new User();
 
         if (!$this->userModel->logged_in()) {
-            redirect('login');
+            redirect('auth/login');
         }
     }
 

@@ -8,14 +8,18 @@ class AdminController
 
 	public function __construct()
 	{
-		$user = new User();
-		if(!user()){
+		if (!user()) 
+		{
 			redirect('auth/login');
 		}
 	}
 
 	public function index(): void
 	{
+		if (user('user_role') != 'Admin') 
+		{
+			redirect('admin/no-access');
+		}
 		$settings = new Settings();
 		$appSettings = $settings->loadSettings();
 
@@ -71,6 +75,12 @@ class AdminController
 		$this->view('admin/index', $data);
 	}
 
+	public function no_access(): void
+	{
+		$data['page_title'] = 'No Access';
+		$this->view('admin/users/no-access', $data);
+	}
+
 	private function getExistingTables(): array
 	{
 		try {
@@ -122,7 +132,7 @@ class AdminController
 
 		// Check if current user is logged in 
 		if (!$user->logged_in())
-			redirect('login');
+			redirect('auth/login');
 
 		$company_detail->limit = 1;
 		$data['company_details'] = $company_detail->findAll();
@@ -143,7 +153,7 @@ class AdminController
 
 		// Check if current user is logged in 
 		if (!$user->logged_in())
-			redirect('login');
+			redirect('auth/login');
 
 		// Create Logo Folder
 		$folder = 'uploads/logo/';
@@ -158,15 +168,15 @@ class AdminController
 		$data['row'] = $company_detail->first(['id' => $id]);
 
 		if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-			if ($_FILES['image'] && $_FILES['image']['error'] == UPLOAD_ERR_OK && $company_detail->validate($_FILES,$_POST, $id)) {
+			if ($_FILES['image'] && $_FILES['image']['error'] == UPLOAD_ERR_OK && $company_detail->validate($_FILES, $_POST, $id)) {
 				$destination = $folder . time() . '_' . $_FILES['image']['name'];
 				move_uploaded_file($_FILES['image']['tmp_name'], $destination);
-				
+
 				$_POST['image'] = $destination;
 				if ($_POST['csrf_token'] !== $_SESSION['csrf_token']) {
 					die('Invalid CSRF Token!');
 				} else {
-					
+
 					$company_detail->update($id, $_POST);
 					Util::setFlash('company_details_update_success', 'Company details updated Successfully!!');
 					redirect('admin/company');
@@ -181,103 +191,103 @@ class AdminController
 		$this->view('admin/company/company-details-edit', $data);
 	}
 
-	public function socialLinks($id = null) 
+	public function socialLinks($id = null)
 	{
-		$user = new User(); 
+		$user = new User();
 		$social_link = new SocialLink();
-		
+
 		// Check if current user is logged in 
-		if(!$user->logged_in())
-			redirect('login');
+		if (!$user->logged_in())
+			redirect('auth/login');
 
 		$social_link->limit = 1;
 		$data['social_links'] = $social_link->findAll();
 		$data['admin_user'] = $user->adminUser();
-		 
+
 		$data['page_title'] = 'Social Links';
-		
+
 
 		$this->view('admin/company/social_link', $data);
 	}
 
-	public function socialLinksEdit($id = null) 
+	public function socialLinksEdit($id = null)
 	{
-		$user = new User(); 
+		$user = new User();
 		$social_link = new SocialLink();
-		
+
 		// Check if current user is logged in 
-		if(!$user->logged_in())
-			redirect('login');
+		if (!$user->logged_in())
+			redirect('auth/login');
 
 		$social_link->limit = 1;
 		$data['social_links'] = $social_link->findAll();
 		$data['admin_user'] = $user->adminUser();
-		 
+
 		$data['row'] = $social_link->first(['id' => $id]);
 
-			if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-				if ($social_link->validate($_POST, $id)) {
-					
-					$social_link->update($id,$_POST);
-					Util::setFlash('link_update_success', 'Social Links updated Successfully!!');
-					redirect('admin/social');
-				}
+		if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+			if ($social_link->validate($_POST, $id)) {
+
+				$social_link->update($id, $_POST);
+				Util::setFlash('link_update_success', 'Social Links updated Successfully!!');
+				redirect('admin/social');
 			}
+		}
 
 		$data['errors'] = $social_link->errors;
 		$data['page_title'] = 'Edit Social Links';
-		
+
 
 		$this->view('admin/company/social-link-edit', $data);
 	}
 
-	public function operatingHours($id = null) 
+	public function operatingHours($id = null)
 	{
-		$user = new User(); 
+		$user = new User();
 		$op_hour = new OperatingHour();
-		
-		
+
+
 		// Check if current user is logged in 
-		if(!$user->logged_in())
-			redirect('login');
+		if (!$user->logged_in())
+			redirect('auth/login');
 
 		$op_hour->limit = 1;
 		$data['op_hours'] = $op_hour->findAll();
 		$data['admin_user'] = $user->adminUser();
-		 
+
 		$data['page_title'] = 'Operating Hours';
-		
+
 		$this->view('admin/company/op-hours', $data);
 	}
-	
-	public function operatingHoursEdit($id = null) 
+
+	public function operatingHoursEdit($id = null)
 	{
-		$user = new User(); 
+		$user = new User();
 		$op_hour = new OperatingHour();
-		
-		
+
+
 		// Check if current user is logged in 
-		if(!$user->logged_in())
-			redirect('login');
+		if (!$user->logged_in())
+			redirect('auth/login');
 
 		$op_hour->limit = 1;
 		$data['op_hours'] = $op_hour->findAll();
 		$data['admin_user'] = $user->adminUser();
-		 
+
 		$data['row'] = $op_hour->first(['id' => $id]);
 
-			if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-				if ($op_hour->validate($_POST, $id)) {
-					
-					$op_hour->update($id,$_POST);
-					Util::setFlash('ophours_update_success', 'Business Hours updated Successfully!!');
-					redirect('admin/hours');
-				}
+		if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+			if ($op_hour->validate($_POST, $id)) {
+
+				$op_hour->update($id, $_POST);
+				Util::setFlash('ophours_update_success', 'Business Hours updated Successfully!!');
+				redirect('admin/hours');
 			}
+		}
 
 		$data['errors'] = $op_hour->errors;
 		$data['page_title'] = 'Edit Operating Hours';
-		
+
 
 		$this->view('admin/company/op-hours-edit', $data);
 	}

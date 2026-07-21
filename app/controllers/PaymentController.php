@@ -16,7 +16,7 @@ class PaymentController
 
 		// Check if current user is logged in 
 		if (!$user->logged_in())
-			redirect('login');
+			redirect('auth/login');
 	}
 
     public function index(): void
@@ -73,7 +73,7 @@ class PaymentController
         $client = new Client();
 
         if (!$user->logged_in()) {
-            redirect('login');
+            redirect('auth/login');
         }
 
         if (!$id) {
@@ -117,7 +117,7 @@ class PaymentController
         $user = new User();
 
         if (!$user->logged_in()) {
-            redirect('login');
+            redirect('auth/login');
         }
 
         if (!$id) {

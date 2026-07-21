@@ -16,7 +16,7 @@ class PostController
 
 		// Check if current user is logged in 
 		if (!$user->logged_in())
-			redirect('login');
+			redirect('auth/login');
 	}
 
 	public function index(?string $id = null): void
@@ -81,7 +81,7 @@ class PostController
 
 		// Check if current user is looged in 
 		if (!$user->logged_in())
-			redirect('login');
+			redirect('auth/login');
 
 		$data['categories'] = $category->findAll();
 
@@ -213,7 +213,7 @@ class PostController
 
 		// Check if current user is looged in 
 		if (!$user->logged_in())
-			redirect('login');
+			redirect('auth/login');
 
 		$data['categories'] = $category->findAll();
 

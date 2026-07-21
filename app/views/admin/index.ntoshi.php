@@ -18,9 +18,21 @@ $this->view('inc/header', $data);
             <p class="mb-0">Here's your business overview at a glance.</p>
         </div>
         <div class="d-flex gap-2">
-            <a href="<?= ROOT ?>/admin/sentinel/dashboard" class="btn btn-accent">
-                <i class="fas fa-shield-halved"></i> sentinel SA Command Centre
-            </a>
+            <?php
+            switch (user('user_role')) {
+                case 'Sys Admin':
+                case 'Admin': ?>
+                    <a href="<?= ROOT ?>/admin/company" class="btn btn-accent">
+                        <i class="fas fa-shield-halved"></i> Business Profile Settings
+                    </a>
+            <?php
+                    break;
+
+                default:
+                    # code...
+                    break;
+            }
+            ?>
             <a href="<?= ROOT ?>" class="btn-primary">
                 <i class="fas fa-external-link-alt"></i> Frontend
             </a>
@@ -28,119 +40,131 @@ $this->view('inc/header', $data);
     </div>
 </div>
 
-<!-- Stats Cards Row -->
-<div class="row g-4 mb-4">
-    <div class="col-md-3">
-        <a href="<?= ROOT . '/admin/users' ?>" style="text-decoration:none" class="text-light">
-            <div class="glass-card text-center">
-                <i class="fas fa-users" style="font-size: 2rem; color: #2dd4bf;"></i>
-                <h2 class="mt-2 mb-0"><?= $total_users ?></h2>
-                <p class="text-muted mb-0">Total Users</p>
+<?php
+switch (user('user_role')) {
+    case 'Sys Admin': 
+    case 'Admin': ?>
+        <!-- Stats Cards Row -->
+        <div class="row g-4 mb-4">
+            <div class="col-md-3">
+                <a href="<?= ROOT . '/admin/users' ?>" style="text-decoration:none" class="text-light">
+                    <div class="glass-card text-center">
+                        <i class="fas fa-users" style="font-size: 2rem; color: #2dd4bf;"></i>
+                        <h2 class="mt-2 mb-0"><?= $total_users ?></h2>
+                        <p class="text-muted mb-0">Total Users</p>
+                    </div>
+                </a>
             </div>
-        </a>
-    </div>
-    <div class="col-md-3">
-        <a href="<?= ROOT . '/admin/employees' ?>" style="text-decoration:none" class="text-light">
-            <div class="glass-card text-center">
-                <i class="fas fa-user-tie" style="font-size: 2rem; color: #ffc107;"></i>
-                <h2 class="mt-2 mb-0"><?= $total_employees ?></h2>
-                <p class="text-muted mb-0">Employees</p>
+            <div class="col-md-3">
+                <a href="<?= ROOT . '/admin/employees' ?>" style="text-decoration:none" class="text-light">
+                    <div class="glass-card text-center">
+                        <i class="fas fa-user-tie" style="font-size: 2rem; color: #ffc107;"></i>
+                        <h2 class="mt-2 mb-0"><?= $total_employees ?></h2>
+                        <p class="text-muted mb-0">Employees</p>
+                    </div>
+                </a>
             </div>
-        </a>
-    </div>
-    <div class="col-md-3">
-        <a href="<?= ROOT . '/admin/payments' ?>" style="text-decoration:none" class="text-light">
-            <div class="glass-card text-center">
-                <i class="fas fa-credit-card" style="font-size: 2rem; color: #38bdf8;"></i>
-                <h2 class="mt-2 mb-0"><?= $total_payments ?></h2>
-                <p class="text-muted mb-0">Payments Received</p>
+            <div class="col-md-3">
+                <a href="<?= ROOT . '/admin/payments' ?>" style="text-decoration:none" class="text-light">
+                    <div class="glass-card text-center">
+                        <i class="fas fa-credit-card" style="font-size: 2rem; color: #38bdf8;"></i>
+                        <h2 class="mt-2 mb-0"><?= $total_payments ?></h2>
+                        <p class="text-muted mb-0">Payments Received</p>
+                    </div>
+                </a>
             </div>
-        </a>
-    </div>
-    <div class="col-md-3">
-        <a href="<?= ROOT . '/admin/expenditure' ?>" style="text-decoration:none" class="text-light">
-            <div class="glass-card text-center">
-                <i class="fas fa-wallet" style="font-size: 2rem; color: #2dd4bf;"></i>
-                <h2 class="mt-2 mb-0"><?= $total_expenditure !== null ? DEF_CURR . number_format($total_expenditure, 2) : '0.00' ?></h2>
-                <p class="text-muted mb-0">Total Expenditure</p>
+            <div class="col-md-3">
+                <a href="<?= ROOT . '/admin/expenditure' ?>" style="text-decoration:none" class="text-light">
+                    <div class="glass-card text-center">
+                        <i class="fas fa-wallet" style="font-size: 2rem; color: #2dd4bf;"></i>
+                        <h2 class="mt-2 mb-0"><?= $total_expenditure !== null ? DEF_CURR . number_format($total_expenditure, 2) : '0.00' ?></h2>
+                        <p class="text-muted mb-0">Total Expenditure</p>
+                    </div>
+                </a>
             </div>
-        </a>
-    </div>
-</div>
+        </div>
 
-<!-- Charts Row -->
-<div class="row g-4 mb-4">
-    <div class="col-lg-6">
-        <div class="glass-card">
-            <h3 class="gradient-text mb-3">
-                <i class="fas fa-chart-pie"></i> Payments by Method
-            </h3>
-            <canvas id="paymentMethodChart" style="max-height: 300px; width: 100%;"></canvas>
-            <?php if (!empty($payment_methods)): ?>
-                <div class="row mt-3 text-center">
-                    <?php foreach ($payment_methods as $method): ?>
-                        <div class="col">
-                            <span class="badge" style="background: rgba(45,212,191,0.2); color: #2dd4bf;"><?= esc($method['label']) ?></span>
-                            <p class="mt-1 mb-0"><?= DEF_CURR ?><?= number_format($method['value'], 2) ?></p>
+        <!-- Charts Row -->
+        <div class="row g-4 mb-4">
+            <div class="col-lg-6">
+                <div class="glass-card">
+                    <h3 class="gradient-text mb-3">
+                        <i class="fas fa-chart-pie"></i> Payments by Method
+                    </h3>
+                    <canvas id="paymentMethodChart" style="max-height: 300px; width: 100%;"></canvas>
+                    <?php if (!empty($payment_methods)): ?>
+                        <div class="row mt-3 text-center">
+                            <?php foreach ($payment_methods as $method): ?>
+                                <div class="col">
+                                    <span class="badge" style="background: rgba(45,212,191,0.2); color: #2dd4bf;"><?= esc($method['label']) ?></span>
+                                    <p class="mt-1 mb-0"><?= DEF_CURR ?><?= number_format($method['value'], 2) ?></p>
+                                </div>
+                            <?php endforeach; ?>
                         </div>
-                    <?php endforeach; ?>
+                    <?php endif; ?>
+                </div>
+            </div>
+
+            <div class="col-lg-6">
+                <div class="glass-card">
+                    <h3 class="gradient-text mb-3">
+                        <i class="fas fa-chart-line"></i> Payment Trend (12 Months)
+                    </h3>
+                    <canvas id="trendChart" style="max-height: 300px; width: 100%;"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <!-- Recent Expenditure Table -->
+        <div class="glass-card mb-4">
+            <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap">
+                <h3 class="gradient-text mb-0">
+                    <i class="fas fa-receipt"></i> Recent Expenditure
+                </h3>
+            </div>
+
+            <?php if (empty($recent_expenditures)): ?>
+                <div class="text-center py-4">
+                    <i class="fas fa-inbox" style="font-size: 3rem; opacity: 0.5;"></i>
+                    <p class="mt-2">No expenditure recorded yet.</p>
+                </div>
+            <?php else: ?>
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Description</th>
+                                <th>Type</th>
+                                <th>Amount</th>
+                                <th>Paid Via</th>
+                                <th>Date</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php foreach ($recent_expenditures as $exp): ?>
+                                <tr style="border-bottom: 1px solid rgba(0,255,255,0.1);">
+                                    <td><?= $exp->id ?></td>
+                                    <td><strong><?= esc($exp->description) ?></strong></td>
+                                    <td><?= esc($exp->expense_type) ?></td>
+                                    <td><?= DEF_CURR ?><?= number_format($exp->amount, 2) ?></td>
+                                    <td><?= esc($exp->paid_via) ?></td>
+                                    <td><?= date('d M Y', strtotime($exp->expenditure_date)) ?></td>
+                                </tr>
+                            <?php endforeach; ?>
+                        </tbody>
+                    </table>
                 </div>
             <?php endif; ?>
         </div>
-    </div>
+<?php
+        break;
 
-    <div class="col-lg-6">
-        <div class="glass-card">
-            <h3 class="gradient-text mb-3">
-                <i class="fas fa-chart-line"></i> Payment Trend (12 Months)
-            </h3>
-            <canvas id="trendChart" style="max-height: 300px; width: 100%;"></canvas>
-        </div>
-    </div>
-</div>
-
-<!-- Recent Expenditure Table -->
-<div class="glass-card mb-4">
-    <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap">
-        <h3 class="gradient-text mb-0">
-            <i class="fas fa-receipt"></i> Recent Expenditure
-        </h3>
-    </div>
-
-    <?php if (empty($recent_expenditures)): ?>
-        <div class="text-center py-4">
-            <i class="fas fa-inbox" style="font-size: 3rem; opacity: 0.5;"></i>
-            <p class="mt-2">No expenditure recorded yet.</p>
-        </div>
-    <?php else: ?>
-        <div class="table-responsive">
-            <table class="table table-hover">
-                <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>Description</th>
-                        <th>Type</th>
-                        <th>Amount</th>
-                        <th>Paid Via</th>
-                        <th>Date</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php foreach ($recent_expenditures as $exp): ?>
-                        <tr style="border-bottom: 1px solid rgba(0,255,255,0.1);">
-                            <td><?= $exp->id ?></td>
-                            <td><strong><?= esc($exp->description) ?></strong></td>
-                            <td><?= esc($exp->expense_type) ?></td>
-                            <td><?= DEF_CURR ?><?= number_format($exp->amount, 2) ?></td>
-                            <td><?= esc($exp->paid_via) ?></td>
-                            <td><?= date('d M Y', strtotime($exp->expenditure_date)) ?></td>
-                        </tr>
-                    <?php endforeach; ?>
-                </tbody>
-            </table>
-        </div>
-    <?php endif; ?>
-</div>
+    default:
+        # code...
+        break;
+}
+?>
 
 <!-- Upcoming Meetings -->
 <?php if (!empty($upcoming_meetings)): ?>

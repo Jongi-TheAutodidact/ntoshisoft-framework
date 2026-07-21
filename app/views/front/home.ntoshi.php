@@ -1,7 +1,9 @@
 <?php
 /** @var string $siteName */
 /** @var array $data */
-$this->view('inc/header', $data); ?>
+$this->view('inc/header', $data); 
+Util::displayFlash('register_success','success');
+?>
 
 <div class="container">
     <div class="hero-section" style="text-align: center; margin-bottom: 3rem;">

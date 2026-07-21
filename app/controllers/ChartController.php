@@ -13,7 +13,7 @@ class ChartController
     public function __construct()
     {
         $user = new User();
-        // if (!$user->logged_in()) redirect('login');
+        // if (!$user->logged_in()) redirect('auth/login');
     }
 
     public function index(): void
@@ -55,7 +55,7 @@ class ChartController
     {
         // Skip authentication for this method
         // $user = new User();
-        // if (!$user->logged_in()) redirect('login');
+        // if (!$user->logged_in()) redirect('auth/login');
 
         $chart = new Chart();
         $chartConfig = $chart->first(['id' => $id]);

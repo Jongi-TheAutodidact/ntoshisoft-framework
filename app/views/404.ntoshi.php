@@ -13,8 +13,8 @@
 
 
     <!-- Favicons -->
-    <link href="<?= ROOT . '/assets/img/Logos/bleki-logo-1.png' ?>" rel="icon">
-    <link href="<?= ROOT . '/assets/img/Logos/bleki-logo-1.png' ?>" rel="apple-touch-icon">
+    <link href="<?= ROOT . '/assets/img/logos/logo.png' ?>" rel="icon">
+    <link href="<?= ROOT . '/assets/img/logos/logo.png' ?>" rel="apple-touch-icon">
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Bootstrap Icons -->

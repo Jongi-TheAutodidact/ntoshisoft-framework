@@ -10,7 +10,7 @@ class LogViewerController
 
         // Only admins allowed
         if (!$user->logged_in() || user('user_role') !== 'Admin') {
-            redirect('login');
+            redirect('auth/login');
         }
 
         $logFile = __DIR__ . '/../private/password_log_file.txt';
@@ -47,7 +47,7 @@ class LogViewerController
 
         // Only admins allowed
         if (!$user->logged_in() || user('user_role') !== 'Admin') {
-            redirect('login');
+            redirect('auth/login');
         }
 
         $logFile = __DIR__ . '/../private/password_log_file.txt';
