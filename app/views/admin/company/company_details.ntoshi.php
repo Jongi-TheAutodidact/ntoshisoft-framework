@@ -21,7 +21,7 @@ $this->view('inc/header', $data);
                                 <tbody>
                                     <?php
                                     $userRows = 1;
-                                    if (!empty($company_details)) : show($company_details[0]->about);die;
+                                    if (!empty($company_details)) :
                                         foreach ($company_details as $row) :
                                     ?>
                                             <tr>
