@@ -163,7 +163,6 @@ These are the minimum tables needed for the framework to function (authenticatio
 
 The framework also includes **example migrations, models, controllers, and CRUD views** in the codebase. These are provided as **reference implementations** — ready-made examples you can study, adapt, or use as a starting point for your own project.
 
-> **Do not migrate all migrations during setup.** Running every included migration would create tables you may never use and clutter your database. Instead:
 >
 > 1. Browse `app/migrations/`, `app/models/`, `app/controllers/`, and `app/views/` to see what's available.
 > 2. Pick only the ones relevant to your project.
