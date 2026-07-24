@@ -64,6 +64,33 @@ return [
     'admin/hours'                                => ['AdminController', 'operatingHours'],
     'admin/hours/edit/{id}'                      => ['AdminController', 'operatingHoursEdit'],
 
+    // Chat 
+    'admin/chat'                                 => ['ChatController', 'index'],
+    'admin/chat/room/{id}'                       => ['ChatController', 'room'],
+    'admin/chat/conversation/{id}'               => ['ChatController', 'conversation'],
+    'admin/chat/start/{id}'                      => ['ChatController', 'startConversation'],
+    'admin/chat/join/{id}'                       => ['ChatController', 'joinRoom'],
+    'admin/chat/leave/{id}'                      => ['ChatController', 'leaveRoom'],
+    'admin/chat/create-room'                     => ['ChatController', 'createRoom'],
+    'admin/chat/add-participant'                 => ['ChatController', 'addParticipant'],
+    'admin/chat/remove-participant'              => ['ChatController', 'removeParticipant'],
+    'admin/chat/send'                            => ['ChatController', 'apiSendMessage'],
+    'admin/chat/messages'                        => ['ChatController', 'getMessages'],
+    'admin/chat/upload-voice'                    => ['ChatController', 'uploadVoice'],
+    'admin/chat/upload-image'                    => ['ChatController', 'uploadImage'],
+    'admin/chat/mark-read'                       => ['ChatController', 'markRead'],
+    'admin/chat/typing'                          => ['ChatController', 'typing'],
+    'admin/chat/get-typing'                      => ['ChatController', 'getTyping'],
+    'admin/chat/contacts'                        => ['ChatController', 'getContacts'],
+    'admin/chat/online'                          => ['ChatController', 'getOnlineUsers'],
+    'admin/chat/search'                          => ['ChatController', 'search'],
+    'admin/chat/delete-message'                  => ['ChatController', 'deleteMessage'],
+
+    // Boardroom
+    'admin/meetings'                             => ['MeetingsController', 'meetings'],
+    'admin/create-meeting'                       => ['MeetingsController', 'create_meeting'],
+    'admin/boardroom'                            => ['MeetingsController', 'boardroom'],
+
     // Track Visitors
     'admin/visitors'                             => ['VisitorController', 'visitors'],
     'admin/visitors/view/{id}'                   => ['VisitorController', 'single_view'],

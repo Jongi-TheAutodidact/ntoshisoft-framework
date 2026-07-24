@@ -4,13 +4,9 @@
      */
     $this->view('inc/header', $data); ?>
 
-<div class="p-3 mt-2 mx-4 bg-body-tertiary shadow-sm rounded animated-card d-flex flex-column align-items-center text-center" style="--animation-order: 1;">
-    <?php $this->view('inc/welcome', $data); ?>
-</div>
-
 <!-- Meeting Header -->
-<div class="p-3 mt-2 mx-4 bg-body-tertiary shadow-sm rounded animated-card text-center" style="--animation-order: 1.5;">
-    <h3><?= esc($data['meeting_title']) ?></h3>
+<div class="p-3 mt-2 mx-4 shadow-sm rounded animated-card text-center bg-secondary rounded text-light" style="--animation-order: 1.5;">
+    <h3 class="text-dark"><?= esc($data['meeting_title']) ?></h3>
     <?php if (isset($data['meeting_id']) && $data['meeting_id'] !== 'default_room'): ?>
         <p class="text-muted">Meeting ID: <?= esc($data['meeting_id']) ?></p>
     <?php endif; ?>

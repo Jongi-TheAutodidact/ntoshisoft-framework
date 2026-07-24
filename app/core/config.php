@@ -91,6 +91,19 @@ define('USER_ROLES', array_map('ucwords', array_map('strtolower', [
     'Employee',
 ])));
 
+define('STAFF_CHAT', array_map('ucwords', array_map('strtolower', [
+    'Sys Admin',
+    'Admin', 
+    'Editor',
+    'User',
+    'Employee',
+])));
+
+define('TECH_TEAM', array_map('ucwords', array_map('strtolower', [
+    'Sys Admin',
+    'Admin', 
+])));
+
 define('PROVINCES', array_map('ucwords', array_map('strtolower', [
     'Eastern Cape',
     'KwaZulu Natal', 

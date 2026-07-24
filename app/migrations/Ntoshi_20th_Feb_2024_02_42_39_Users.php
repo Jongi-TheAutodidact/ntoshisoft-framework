@@ -15,7 +15,7 @@ class Users extends Migration
 
 		$this->addColumn('id int(11) NOT NULL AUTO_INCREMENT'); 
 		$this->addColumn('image varchar(1024) NOT NULL');
-		$this->addColumn('user_id varchar(1024) DEFAULT NULL');
+		$this->addColumn('user_id int(5) NOT NULL');
 		$this->addColumn('firstname varchar(50) NOT NULL');
 		$this->addColumn('surname varchar(50) NOT NULL');
 		$this->addColumn('gender varchar(6) NOT NULL');

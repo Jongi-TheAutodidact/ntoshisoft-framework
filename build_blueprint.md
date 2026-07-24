@@ -28,7 +28,7 @@ Every person who interacts with the system is first and foremost a **User** (sto
 - One login for all personas
 - No separate registration flows per role
 - Role assignment happens during profile/resource creation, not at signup
-- A single person can wear multiple hats (e.g., Employee who is also a Client)
+- *** VERY IMPORTANT *** - The "user_id" is (always) a five (5) digit int (NOT A STRING), and is not to be confused with the table's incrementing 'id' colum. This is highly instrumental in joining the db tables.
 
 ### 1.2 Model as a Trait, Not a Base Class
 The `Model`, `Database`, and `Controller` are all **PHP traits**. This gives you:
@@ -49,7 +49,9 @@ The `Model`, `Database`, and `Controller` are all **PHP traits**. This gives you
 
 Before writing a single line of code, complete this planning phase. Fill in the `[square brackets]` with your project-specific details.
 
-### 2.1 Sector & Domain Definition
+*** VERY IMPORTANT *** => Do not touch the "core" directory and its files as this is the engine of the framework. Only during special circumstances that this directory may be touched, mostly when we tweak base don a project-specific requirement
+
+### 2.1 Sector & Domain Definition 
 ```
 Sector:        [e.g., Healthcare / Education / Real Estate / Logistics / Retail / Finance / HR / Agriculture]
 Application:   [e.g., Clinic Management System / School Portal / Property Manager / Fleet Tracker]

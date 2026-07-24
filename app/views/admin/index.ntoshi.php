@@ -25,11 +25,14 @@ $this->view('inc/header', $data);
                     <a href="<?= ROOT ?>/admin/company" class="btn btn-accent">
                         <i class="fas fa-shield-halved"></i> Business Profile Settings
                     </a>
-            <?php
+                <?php
                     break;
 
-                default:
-                    # code...
+                default: ?>
+                    <a href="<?= ROOT ?>/admin/chat" class="btn btn-accent">
+                        <i class="fas fa-comment-dots"></i> Chat Room
+                    </a>
+            <?php
                     break;
             }
             ?>
@@ -42,8 +45,8 @@ $this->view('inc/header', $data);
 
 <?php
 switch (user('user_role')) {
-    case 'Sys Admin': 
-    case 'Admin': ?>
+    case 'Sys Admin':
+    case 'Admin':  ?>
         <!-- Stats Cards Row -->
         <div class="row g-4 mb-4">
             <div class="col-md-3">
@@ -82,6 +85,47 @@ switch (user('user_role')) {
                     </div>
                 </a>
             </div>
+        </div>
+
+
+        <!-- Quick links -->
+        <div class="row g-4 mb-4">
+            <h3 class="gradient-text mb-3 text-center">
+                </i> Quick Link Cards
+            </h3>
+            <div class="col-md-3">
+                <a href="<?= ROOT . '/admin/chat' ?>" style="text-decoration:none" class="text-light">
+                    <div class="glass-card text-center">
+                        <i class="fas fa-comment-dots" style="font-size: 2rem; color: #2dd4bf;"></i>
+                        <p class="text-muted mb-0">Chat Room</p>
+                    </div>
+                </a>
+            </div>
+            <div class="col-md-3">
+                <a href="<?= ROOT . '/admin/meetings' ?>" style="text-decoration:none" class="text-light">
+                    <div class="glass-card text-center">
+                        <i class="fas fa-briefcase" style="font-size: 2rem; color: #2dd4bf;"></i>
+                        <p class="text-muted mb-0">Boardroom</p>
+                    </div>
+                </a>
+            </div>
+            <div class="col-md-3">
+                <a href="#" style="text-decoration:none" class="text-light">
+                    <div class="glass-card text-center">
+                        <i class="fas fa-arrow-left" style="font-size: 2rem; color: #2dd4bf;"></i>
+                        <p class="text-muted mb-0">Another Link</p>
+                    </div>
+                </a>
+            </div>
+            <div class="col-md-3">
+                <a href="#" style="text-decoration:none" class="text-light">
+                    <div class="glass-card text-center">
+                        <i class="fas fa-arrow-right" style="font-size: 2rem; color: #2dd4bf;"></i>
+                        <p class="text-muted mb-0">Another Link</p>
+                    </div>
+                </a>
+            </div>
+
         </div>
 
         <!-- Charts Row -->

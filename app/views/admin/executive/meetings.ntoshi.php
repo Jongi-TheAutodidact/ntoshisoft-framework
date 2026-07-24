@@ -4,9 +4,6 @@
      * @var array $data
      */
     $this->view('inc/header', $data); ?>
-<div class="p-3 mt-2 mx-4 bg-body-tertiary shadow-sm rounded animated-card d-flex flex-column align-items-center text-center" style="--animation-order: 1;">
-    <?php $this->view('inc/welcome', $data); ?>
-</div>
 
 <main id="main" class="main">
     <section class="section p-4">
@@ -16,7 +13,8 @@
                     <div class="card-body">
                         <div class="d-flex justify-content-between align-items-center mb-3">
                             <h3 class="fs-4 page-title">Meetings</h3>
-                            <a href="<?= ROOT ?>/admin/create-meeting" class="btn btn-warning text-dark"><i class="bi bi-plus-circle me-2"></i>Add New Meeting</a>
+                            <a href="<?= ROOT ?>/admin/create-meeting" class="btn btn-warning text-dark"><i class="fa fa-plus-circle me-2"></i>Add New Meeting</a>
+                            <a href="<?= ROOT ?>/admin/boardroom" class="btn btn-warning text-dark"><i class="fa fa-plus-circle me-2"></i>Join Inside Boardroom</a>
                         </div>
                         <hr>
 
@@ -46,8 +44,8 @@
                                         <td><?= esc($meet->notes) ?></td>
                                         <td>
                                             <div class="text-center d-flex gap-2 justify-content-center">
-                                                <a href="<?= ROOT ?>/admin/meeting/edit/<?= $meet->id ?>" class="btn btn-sm btn-warning"><i class="bi bi-pencil-square"></i></a>
-                                                <a href="<?= ROOT ?>/admin/meeting/delete/<?= $meet->id ?>" onclick="return confirm('Are you sure?')" class="btn btn-sm btn-danger"><i class="bi bi-trash"></i></a>
+                                                <a href="<?= ROOT ?>/admin/meeting/edit/<?= $meet->id ?>" class="btn btn-sm btn-warning"><i class="fa fa-pencil"></i></a>
+                                                <a href="<?= ROOT ?>/admin/meeting/delete/<?= $meet->id ?>" onclick="return confirm('Are you sure?')" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></a>
                                             </div>
                                         </td>
                                     </tr>

@@ -16,10 +16,12 @@ class AdminController
 
 	public function index(): void
 	{
-		if (user('user_role') != 'Admin') 
-		{
+		if (!in_array(user('user_role'), STAFF_CHAT)) {
+			// Redirect to no access page
 			redirect('admin/no-access');
+			exit();
 		}
+		
 		$settings = new Settings();
 		$appSettings = $settings->loadSettings();
 
