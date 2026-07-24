@@ -151,6 +151,14 @@ The installation wizard creates **only two default tables**:
 
 These are the minimum tables needed for the framework to function (authentication and basic settings).
 
+> **Important:** After logging in, you'll see the full dashboard with navigation links to features like **Chatroom**, **Payments**, **Employees**, etc. These are generic modules — clicking them without their database tables will throw errors. To fully explore the framework, migrate all shipped example migrations using the cli command:
+>
+> ```bash
+> php jongi migrate:all
+> ```
+>
+> This creates the remaining tables for the bundled generic modules. You can add, remove, or modify any of these later to suit your project.
+
 ### Ships With — But Not Auto-Migrated
 
 The framework also includes **example migrations, models, controllers, and CRUD views** in the codebase. These are provided as **reference implementations** — ready-made examples you can study, adapt, or use as a starting point for your own project.
