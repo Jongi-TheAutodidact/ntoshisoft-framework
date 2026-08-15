@@ -12,6 +12,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title><?= esc($page_title ?? 'Home') ?> – <?= APP_NAME_SHORT ?></title>
     <link rel="icon" href="<?= ROOT . '/assets/img/logos/favicon.png' ?>" type="image/x-icon" />
+    <!-- CSRF token for the offline sync engine -->
+    <meta name="csrf-token" content="<?= user() ? ($_SESSION['csrf_token'] ?? '') : '' ?>">
+    <?php if (PWA_ENABLED): ?>
+    <!-- Progressive Web App -->
+    <link rel="manifest" href="<?= ROOT . '/manifest.json' ?>">
+    <meta name="theme-color" content="#0b1120">
+    <?php endif; ?>
+    <!-- Offline-First / PWA styles -->
+    <link rel="stylesheet" href="<?= ROOT . '/assets/css/offline.css' ?>">
     <!-- Open Graph / Social -->
     <meta property="og:title" content="<?= esc($page_title ?? APP_NAME_SHORT) ?>" />
     <meta property="og:description" content="<?= esc($meta_description ?? 'Send a voice message directly to us. Quick, personal, and easy — no typing required.') ?>" />
@@ -24,7 +33,7 @@
    
 </head>
 
-<body>
+<body data-user="<?= esc(user('user_id')) ?>">
     
     <div class="starfield" id="starfield"></div>
     <div class="theme-toggle mb-0" id="themeToggle">

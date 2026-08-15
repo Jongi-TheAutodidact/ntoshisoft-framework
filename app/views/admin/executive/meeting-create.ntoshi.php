@@ -11,7 +11,7 @@
             <div class="col-lg-12">
                 <div class="card">
                     <div class="card-body">
-                        <form method="POST" action="" id="debtor-new" enctype="multipart/form-data">
+                        <form method="POST" action="" id="debtor-new" enctype="multipart/form-data" data-offline-table="meetings" data-offline-action="insert">
                             <!--CSRF TOKEN-->
                             <input type="hidden" name="<?= esc('csrf_token') ?>" value="<?= $_SESSION['csrf_token'] ?>">
                             <!--VERIFY TOKEN-->

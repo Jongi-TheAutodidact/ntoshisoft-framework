@@ -13,7 +13,7 @@ $this->view('inc/header', $data); ?>
             <div class="col-lg-12">
                 <div class="card">
                     <div class="card-body">
-                        <form method="POST" action="">
+                        <form method="POST" action="" data-offline-table="payments" data-offline-action="update" data-offline-id="<?= $payment->id ?>">
                             <!-- CSRF Token -->
                             <input type="hidden" name="<?= esc('csrf_token') ?>" value="<?= $_SESSION['csrf_token'] ?>">
                             <!--RECORD UPDATED BY-->

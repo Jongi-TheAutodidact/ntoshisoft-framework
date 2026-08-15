@@ -12,6 +12,10 @@ class Employee
 
     protected $table = 'employees';  
     protected $primaryKey = 'id';
+
+    // Participates in the NtoshiSoft offline-first / PWA sync engine.
+    public bool $offlineEnabled = true;
+
     protected $allowedColumns = [
         'user_id',
         'employee_number',

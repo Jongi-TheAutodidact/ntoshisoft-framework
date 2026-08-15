@@ -13,6 +13,9 @@ class Payment
     protected $table = 'payments';
     protected $primaryKey = 'id';
 
+    // Participates in the NtoshiSoft offline-first / PWA sync engine.
+    public bool $offlineEnabled = true;
+
     protected $allowedColumns = [
         'payment_date',
         'client',

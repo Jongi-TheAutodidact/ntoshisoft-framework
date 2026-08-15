@@ -16,6 +16,52 @@ trait Model
 	public $order_column = "id";
 	public $errors 		= [];
 
+	/**
+	 * Offline-first / PWA sync option.
+	 *
+	 * A model opts into the framework's offline sync engine by declaring its own
+	 * opt-in property (the trait deliberately does NOT declare it — PHP forbids a
+	 * class from redefining a trait property with a different default, and some
+	 * business models already define a column of their own with a similar name):
+	 *
+	 *     public bool $offlineEnabled = true;             // opt into offline sync
+	 *     public string $offlineKey = 'user_id';          // optional identity column
+	 *
+	 * Only $allowedColumns are ever written on sync, and only $offlineKey is used
+	 * to match records, so enabling offline mode never widens the write surface.
+	 */
+	public function isOfflineSyncable(): bool
+	{
+		return property_exists($this, 'offlineEnabled') && !empty($this->offlineEnabled);
+	}
+
+	/**
+	 * Column used as the record identity when syncing this table.
+	 */
+	public function getOfflineKey(): string
+	{
+		return (property_exists($this, 'offlineKey') && !empty($this->offlineKey))
+			? (string)$this->offlineKey
+			: 'id';
+	}
+
+	/**
+	 * Columns exposed for offline sync. Defaults to $allowedColumns so the
+	 * mass-assignment gatekeeper also guards offline writes.
+	 */
+	public function offlineColumns(): array
+	{
+		return $this->allowedColumns;
+	}
+
+	/**
+	 * Table this model reads from / writes to.
+	 */
+	public function getTable(): string
+	{
+		return $this->table ?? '';
+	}
+
 
 	public function findAll(): array|false
 	{

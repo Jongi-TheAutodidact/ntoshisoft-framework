@@ -99,6 +99,21 @@ return [
     'admin/settings'                             => ['SettingsController', 'index'],
     'admin/settings/update'                      => ['SettingsController', 'update'],
 
+    /* OFFLINE-FIRST / PWA SYNC API */
+    'offline/config'                             => ['SyncController', 'config'],
+    'offline/pull/{table}'                       => [
+        'controller' => ['SyncController', 'pull'],
+        'middleware' => ['AuthMiddleware']
+    ],
+    'offline/push'                               => [
+        'controller' => ['SyncController', 'push'],
+        'middleware' => ['AuthMiddleware']
+    ],
+    'offline/status'                             => [
+        'controller' => ['SyncController', 'status'],
+        'middleware' => ['AuthMiddleware']
+    ],
+
     /* INSTALLATION ROUTES */
     'install'                                    => ['InstallController', 'index'],
     'install/requirements'                       => ['InstallController', 'requirements'],

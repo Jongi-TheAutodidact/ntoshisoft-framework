@@ -1,0 +1,70 @@
+/*!
+ * NtoshiSoft Offline Status Indicator — Offline-First / PWA feature.
+ * (c) Jongi Mbodla | Jongi Brands Tech Solutions
+ */
+
+.ntoshi-sync-status {
+  position: fixed;
+  right: 16px;
+  bottom: 16px;
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 14px;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  line-height: 1;
+  cursor: pointer;
+  user-select: none;
+  background: rgba(15, 25, 45, 0.92);
+  color: #eef5ff;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+.ntoshi-sync-status:hover {
+  background: rgba(30, 45, 75, 0.95);
+}
+
+.ntoshi-sync-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: #64748b;
+  flex-shrink: 0;
+  transition: background 0.3s ease;
+}
+
+.ntoshi-sync-status.is-online .ntoshi-sync-dot {
+  background: #2dd4bf;
+  box-shadow: 0 0 8px rgba(45, 212, 191, 0.8);
+}
+
+.ntoshi-sync-status.is-offline .ntoshi-sync-dot {
+  background: #f87171;
+  box-shadow: 0 0 8px rgba(248, 113, 113, 0.8);
+}
+
+.ntoshi-sync-status.is-syncing .ntoshi-sync-dot {
+  animation: ntoshi-sync-pulse 1s ease-in-out infinite;
+}
+
+@keyframes ntoshi-sync-pulse {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.6); opacity: 0.5; }
+}
+
+body.light .ntoshi-sync-status {
+  background: rgba(255, 255, 255, 0.95);
+  color: #0b1120;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+  border-color: rgba(0, 0, 0, 0.06);
+}
+
+body.light .ntoshi-sync-status:hover {
+  background: #ffffff;
+}

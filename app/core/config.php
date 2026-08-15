@@ -56,6 +56,14 @@ define('APP_ENV', EnvLoader::get('APP_ENV', 'production'));
 define('SESSION_LIFETIME', EnvLoader::int('SESSION_LIFETIME', 120));
 define('CSRF_TOKEN_LENGTH', EnvLoader::int('CSRF_TOKEN_LENGTH', 32));
 
+// Offline-First / PWA Configuration
+// OFFLINE_MODE: master switch for the offline sync engine (service worker, IndexedDB queue, sync API).
+// PWA_ENABLED:  controls whether the PWA manifest + service worker are registered on pages.
+// SYNC_INTERVAL: seconds between automatic background sync attempts while online.
+define('OFFLINE_MODE', EnvLoader::bool('OFFLINE_MODE', true));
+define('PWA_ENABLED', EnvLoader::bool('PWA_ENABLED', true));
+define('SYNC_INTERVAL', EnvLoader::int('SYNC_INTERVAL', 30));
+
 // Mail Configuration
 define('MAIL_HOST', EnvLoader::get('MAIL_HOST', 'smtp.gmail.com'));
 define('MAIL_USERNAME', EnvLoader::get('MAIL_USERNAME', ''));

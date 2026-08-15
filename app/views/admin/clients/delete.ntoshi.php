@@ -11,7 +11,7 @@ $this->view('inc/header', $data); ?>
             <div class="col-lg-12">
                 <div class="card">
                     <div class="card-body">
-                        <form method="POST" id="order-create" enctype="multipart/form-data">
+                        <form method="POST" id="order-create" enctype="multipart/form-data" data-offline-table="clients" data-offline-action="delete" data-offline-id="<?= $row->id ?>">
                             <!-- CSRF Token -->
                             <input type="hidden" name="<?= esc('csrf_token') ?>" value="<?= $_SESSION['csrf_token'] ?>">
 

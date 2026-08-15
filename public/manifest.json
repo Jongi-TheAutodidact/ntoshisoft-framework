@@ -1,0 +1,25 @@
+{
+  "name": "NtoshiSoft App",
+  "short_name": "NtoshiSoft",
+  "description": "Offline-first business management platform built on the NtoshiSoft framework.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#0b1120",
+  "theme_color": "#0b1120",
+  "orientation": "any",
+  "icons": [
+    {
+      "src": "assets/img/logos/logo.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "assets/img/logos/logo.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}

@@ -142,6 +142,25 @@
         }
     });
 </script>
+
+<!-- ============================================ -->
+<!-- Offline-First / PWA Engine                    -->
+<!-- ============================================ -->
+<script>window.NTOSHI_ROOT = <?= json_encode(ROOT) ?>;</script>
+<script src="<?= ROOT . '/assets/js/offline.js' ?>"></script>
+<?php if (PWA_ENABLED): ?>
+<script>
+    if ('serviceWorker' in navigator) {
+        window.addEventListener('load', function () {
+            navigator.serviceWorker.register('<?= ROOT ?>/sw.js').then(function () {
+                // Service worker registered — the app can now run offline.
+            }).catch(function (err) {
+                console.warn('NtoshiSoft: service worker registration failed.', err);
+            });
+        });
+    }
+</script>
+<?php endif; ?>
 </body>
 
 </html>

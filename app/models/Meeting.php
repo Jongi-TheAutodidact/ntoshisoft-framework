@@ -14,6 +14,9 @@ class Meeting
 	protected $table = 'meetings';
 	protected $primaryKey = 'id';
 
+	// Participates in the NtoshiSoft offline-first / PWA sync engine.
+	public bool $offlineEnabled = true;
+
 
 	protected $allowedColumns = [
 		'meeting_title',

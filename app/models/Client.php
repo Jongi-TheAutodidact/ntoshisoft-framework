@@ -14,6 +14,9 @@ class Client
 	protected $table = 'clients';
 	protected $primaryKey = 'id';
 
+	// Participates in the NtoshiSoft offline-first / PWA sync engine.
+	public bool $offlineEnabled = true;
+
 
 	protected $allowedColumns = [
 		'user_id',

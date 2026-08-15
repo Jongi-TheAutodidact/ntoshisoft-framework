@@ -14,7 +14,7 @@
             <div class="col-lg-6 mx-auto">
                 <div class="card border-danger">
                     <div class="card-body text-center">
-                        <form method="POST" id="employee-delete">
+                        <form method="POST" id="employee-delete" data-offline-table="employees" data-offline-action="delete" data-offline-id="<?= $row->id ?>">
                             <input type="hidden" name="<?= esc('csrf_token') ?>" value="<?= $_SESSION['csrf_token'] ?>">
 
                             <div class="text-danger mb-4">

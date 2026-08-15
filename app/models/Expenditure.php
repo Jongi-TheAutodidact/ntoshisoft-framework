@@ -9,6 +9,9 @@ class Expenditure
     protected $table = 'expenditures';
     protected $primaryKey = 'id'; 
 
+    // Participates in the NtoshiSoft offline-first / PWA sync engine.
+    public bool $offlineEnabled = true;
+
     protected $allowedColumns = [
         'expenditure_date',
         'description',

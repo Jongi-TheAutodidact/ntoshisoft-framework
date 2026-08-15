@@ -15,7 +15,7 @@ $this->view('inc/header', $data);
             <div class="col-lg-12 mx-auto">
                 <div class="card">
                     <div class="card-body">
-                        <form method="POST" id="employee-create">
+                        <form method="POST" id="employee-create" data-offline-table="employees" data-offline-action="insert">
                             <?= displayFormHeaderOnCreate() ?>
 
 

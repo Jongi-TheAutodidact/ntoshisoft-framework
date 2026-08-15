@@ -11,7 +11,7 @@ $this->view('inc/header', $data); ?>
             <div class="col-lg-12">
                 <div class="card">
                     <div class="card-body">
-                        <form method="POST" action="" id="user-new" enctype="multipart/form-data">
+                        <form method="POST" action="" id="user-new" enctype="multipart/form-data" data-offline-table="clients" data-offline-action="update" data-offline-id="<?= $row->id ?>">
                             <?= displayFormHeaderOnUpdate() ?>
 
                             <!--ROW 1-->

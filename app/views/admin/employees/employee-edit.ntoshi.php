@@ -12,7 +12,7 @@ $this->view('inc/header', $data); ?>
             <div class="col-lg-12">
                 <div class="card">
                     <div class="card-body">
-                        <form method="POST" id="employee-edit">
+                        <form method="POST" id="employee-edit" data-offline-table="employees" data-offline-action="update" data-offline-id="<?= $row->id ?>">
                            <?= displayFormHeaderOnUpdate() ?>
                             <input type="hidden" name="employee_number" value="<?= $row->employee_number ?>" readonly>
                             <h5 class="card-title mb-4">Edit Employee: <?= esc($row->firstname . ' ' . $row->surname) ?></h5>
